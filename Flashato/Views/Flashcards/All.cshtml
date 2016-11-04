@@ -66,14 +66,14 @@
                 function render() {
                     vm.$http({
                         method:"GET",
-                        url: "http://localhost:50653/api/flashcards"
+                        url: "/api/flashcards"
                     }).then(_onGetAllSuccess, _onGetAllError);
                 }
 
                 function _onDeleteClick(card){
                     vm.$http({
                         method:"DELETE",
-                        url: 'http://localhost:50653/api/flashcards/' + card.id,
+                        url: '/api/flashcards/' + card.id,
                     }).then(_onDeleteSuccess, _onDeleteError);
 
                     vm.cardDelete = card;

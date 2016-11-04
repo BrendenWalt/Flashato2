@@ -77,7 +77,7 @@
                 function render() {
                     vm.$http({
                         method:"GET",
-                        url: "http://localhost:50653/api/flashcards"
+                        url: "/api/flashcards"
                     }).then(_onGetAllSuccess, _onGetAllError);
                 }
 
@@ -114,22 +114,20 @@
                 }
 
                 function _selectRandom(){
-                    //var random = vm.cardStack[Math.floor(Math.random() * vm.cardStack.length)];
+                  
                     if(vm.cardStack.length > 0){
                         vm.cardFlipVal = true;
                         var random = Math.floor(Math.random() * vm.cardStack.length);
                     
                         vm.selected = vm.cardStack.splice(random, 1);
                         
-
                         vm.activeStack.push(vm.selected[0]);
                         
                         vm.selectedCard = vm.selected[0];
-                        console.log(vm.selectedCard);
+                        
                     } else {
                         alert("End of stack.");
-                    }
-                    
+                    }  
                 }
             }
         })();

@@ -43,7 +43,7 @@
             <button class="btn btn-danger" id="deleteCard" data-ng-click="main.onDeleteClick()">Delete</button>
             <a href="/Flashcards/All" class="btn btn-secondary">View All</a>
         </form>
-        <pre>card:{{main.card | json}}</pre>
+        @*<pre>card:{{main.card | json}}</pre>*@
     </div>
 
 </div>
@@ -98,7 +98,7 @@
                      vm.card.id = cardId;
                      vm.$http({
                          method:"GET",
-                         url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                         url: '/api/flashcards/' + vm.card.id,
                          data: vm.card.id
                      }).then(_onGetCardByIdSuccess, _onGetCardError);
                  }
@@ -112,13 +112,13 @@
                      if(vm.isNewCard){
                          vm.$http({
                              method: 'POST',
-                             url: 'http://localhost:50653/api/flashcards',
+                             url: '/api/flashcards',
                              data: vm.card
                          }).then(_onCardInsertSuccess, _onCardInsertError);
                      } else {
                          vm.$http({
                              method: "PUT",
-                             url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                             url: '/api/flashcards/' + vm.card.id,
                              data: vm.card
                          }).then(_onUpdateSuccess, _onUpdateError);
                      }
@@ -128,7 +128,7 @@
              function _onDeleteClick(){
                  vm.$http({
                      method:"DELETE",
-                     url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                     url: '/api/flashcards/' + vm.card.id,
                  }).then(_onDeleteSuccess, _onDeleteError);
              }
 
