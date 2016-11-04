@@ -1,0 +1,178 @@
+﻿
+@using Flashato.Domain
+@model Flashcard
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div data-ng-controller="addFlashController as main">
+        <h1>New Flashcard</h1>
+        <form id="flashcardForm" name="main.cardForm" novalidate>
+            <div class="form-group">
+                <label>Flashcard Front</label>
+                <div>
+                    <textarea placeholder="Text here"
+                              name="front"
+                              data-ng-model="main.card.front"
+                              data-ng-maxlength="500"
+                              required></textarea>
+                    @*<div role="alert" class="help-inline error">*@
+                      
+                        <span data-ng-show="main.showFormErrors && main.cardForm.front.$error.required">You need stuff here!</span>
+                        <span data-ng-show="main.showFormErrors && main.cardForm.front.$error.max">Too Long! Text must be 500 characters or less</span>
+                    @*</div>*@
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Flashcard Back</label>
+                <div>
+                    <textarea placeholder="Text here"
+                              name="back"
+                              data-ng-model="main.card.back"
+                              data-ng-maxlength="500"
+                              required></textarea>
+                    <div role="alert" class="help-inline error">
+                        <!-- main.showClientErrors is set to true the first time the form is submitted. -->
+                        <span data-ng-show="main.showFormErrors && main.cardForm.back.$error.required">You need stuff here!</span>
+                        <span data-ng-show="main.showFormErrors && main.cardForm.back.$error.max">Too Long! Text must be 500 characters or less</span>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" id="flashFormSubmit" data-ng-click="main.onSubmitClick()">{{main.buttonText}}</button>
+            <button class="btn btn-danger" id="deleteCard" data-ng-click="main.onDeleteClick()">Delete</button>
+            <a href="/Flashcards/All" class="btn btn-secondary">View All</a>
+        </form>
+        <pre>card:{{main.card | json}}</pre>
+    </div>
+
+</div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+
+     @if (Model != null)
+     {
+         @:var cardId = @Model.Id;
+     }
+
+     (function () {
+    "use strict";
+
+    var myApp = angular.module("Flashato",[]);
+
+    myApp.controller('addFlashController', AddFlashController);
+
+    AddFlashController.$inject = ['$scope'
+                                  ,'$http'];
+
+    function AddFlashController($scope
+                                ,$http) {
+
+             var vm = this;
+             vm.$scope = $scope;
+             vm.$http = $http;
+
+             vm.buttonText = "Submit";
+             vm.card = {};
+             vm.showFormErrors = false;
+
+             vm.isNewCard = true;
+             vm.onSubmitClick = _onSubmitClick;
+             vm.onDeleteClick = _onDeleteClick;
+             vm.onCardInsertSuccess = _onCardInsertSuccess;
+             vm.onCardInsertError = _onCardInsertError;
+             vm.onUpdateSuccess = _onUpdateSuccess;
+             vm.onUpdateError = _onUpdateError;
+             vm.onGetCardByIdSuccess = _onGetCardByIdSuccess;
+             vm.onGetCardError = _onGetCardError;
+             vm.onDeleteSuccess = _onDeleteSuccess;
+             vm.onDeleteError = _onDeleteError;
+
+             render();
+
+             function render() {
+                 if (typeof cardId !== 'undefined' && cardId !== null){
+                     vm.card.id = cardId;
+                     vm.$http({
+                         method:"GET",
+                         url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                         data: vm.card.id
+                     }).then(_onGetCardByIdSuccess, _onGetCardError);
+                 }
+             }
+
+             function _onSubmitClick() {
+
+                 vm.showFormErrors = true;
+
+                 if(vm.cardForm.$valid){
+                     if(vm.isNewCard){
+                         vm.$http({
+                             method: 'POST',
+                             url: 'http://localhost:50653/api/flashcards',
+                             data: vm.card
+                         }).then(_onCardInsertSuccess, _onCardInsertError);
+                     } else {
+                         vm.$http({
+                             method: "PUT",
+                             url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                             data: vm.card
+                         }).then(_onUpdateSuccess, _onUpdateError);
+                     }
+                 }              
+             }
+
+             function _onDeleteClick(){
+                 vm.$http({
+                     method:"DELETE",
+                     url: 'http://localhost:50653/api/flashcards/' + vm.card.id,
+                 }).then(_onDeleteSuccess, _onDeleteError);
+             }
+
+             function _onCardInsertSuccess(data) {
+                 alert("Success!");
+                 //vm.isNewCard = false;
+                 vm.buttonText = "Edit";
+                 vm.showFormErrors = false;
+                 vm.card={};
+             }
+
+             function _onCardInsertError() {
+                 console.log("No card for you!");
+             }
+
+             function _onUpdateSuccess(){
+                 alert("Updated");
+             }
+
+             function _onUpdateError(){
+                 console.log("Update Error");
+             }
+
+             function _onGetCardByIdSuccess(data){ 
+                 vm.card = data.data;
+                 vm.isNewCard = false;
+                 console.log(data);
+             }
+
+             function _onGetCardError(){
+                 console.log("error retrieving card(s)");
+             }
+
+             function _onDeleteSuccess(){
+                 console.log("successfully deleted");
+             }
+
+             function _onDeleteError(){
+                 console.log("Delete error");
+             }
+         }
+     })();
+
+    </script>
+}
+
+

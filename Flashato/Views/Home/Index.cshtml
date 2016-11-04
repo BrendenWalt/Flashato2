@@ -1,0 +1,92 @@
+﻿
+@using Flashato.Domain
+@model Flashcard
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <div data-ng-controller="addFlashController as main">
+        <h1>New Flashcard</h1>
+        <form id="flashcardForm">
+            <div class="form-group">
+                <label>Flashcard Front</label>
+                <textarea placeholder="Text here"
+                          data-ng-model="main.card.front"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Flashcard Back</label>
+                <textarea placeholder="Text here"
+                          data-ng-model="main.card.back"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" id="flashFormSubmit" data-ng-click="main.onSubmitClick()">Submit</button>
+        </form>
+        <pre>card:{{main.card | json}}</pre>
+    </div>
+
+</div>
+
+
+@section scripts{
+    
+ <script type="text/javascript">
+
+     @if (Model != null)
+     {
+         @:var cardId = @Model.Id;
+     }
+
+     (function () {
+    "use strict";
+
+    var myApp = angular.module("Flashato",[]);
+
+    myApp.controller('addFlashController', AddFlashController);
+
+    AddFlashController.$inject = ['$scope'
+                                  ,'$http'];
+
+    function AddFlashController($scope
+                                ,$http) {
+
+
+             var vm = this;
+             vm.$scope = $scope;
+             vm.$http = $http;
+             vm.card = {};
+            
+
+             vm.onSubmitClick = _onSubmitClick;
+             vm.onCardInsertSuccess = _onCardInsertSuccess;
+             vm.onCardInsertError = _onCardInsertError;
+
+             render();
+
+             function render() {
+                 if (typeof cardId !== 'undefined' && cardId !== null){
+                     console.log(cardId);
+                 }
+             }
+
+             function _onSubmitClick() {
+                 vm.$http({
+                     method: 'POST',
+                     url: 'http://localhost:50653/api/flashcards',
+                     data: vm.card
+                 }).then(_onCardInsertSuccess, _onCardInsertError);
+             }
+
+             function _onCardInsertSuccess(data) {
+                 alert("Success!");
+                 vm.card = {};
+                 console.log(data);
+             }
+
+             function _onCardInsertError() {
+                 console.log("No card for you!");
+             }
+         }
+     })();
+
+</script>   
+    }

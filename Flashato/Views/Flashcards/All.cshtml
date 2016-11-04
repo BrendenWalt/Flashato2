@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "All";
+}
+
+<div class="jumbotron">
+    <div data-ng-controller="allFlashController as main">
+        <h1>All Flashcards</h1>
+        <div data-ng-repeat="card in main.cards"
+             data-ng-include="'flashcardDisplay'"></div>
+        @*<pre>cards:{{main.cards | json}}</pre>*@
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script type="text/ng-template" id="flashcardDisplay">
+        <div class="col-md-12">
+            <div class="col-md-6 card-display">
+                <h3>{{card.front}}</h3>
+            </div>
+            <div class="col-md-6 card-display">
+                <h3>{{card.back}}</h3>
+            </div>
+            <div class="row">
+                <a href="{{card.id}}/edit" class="btn btn-primary">Edit</a>
+                <button class="btn btn-danger" data-ng-click="main.onDeleteClick(card)">Delete</button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/javascript">
+
+     @if (Model != null)
+     {
+         @:var cardId = @Model.Id;
+                             }
+
+        (function () {
+            "use strict";
+
+            var myApp = angular.module("Flashato",[]);
+
+            myApp.controller('allFlashController', AllFlashController);
+
+            AllFlashController.$inject = ['$scope'
+                                          ,'$http'];
+
+            function AllFlashController($scope
+                                        ,$http) {
+
+
+                var vm = this;
+                vm.$scope = $scope;
+                vm.$http = $http;
+
+                vm.cards=[];
+
+                vm.onDeleteClick = _onDeleteClick;
+                vm.onGetAllSuccess = _onGetAllSuccess;
+                vm.onGetAllError = _onGetAllError;
+
+                render();
+
+                function render() {
+                    vm.$http({
+                        method:"GET",
+                        url: "http://localhost:50653/api/flashcards"
+                    }).then(_onGetAllSuccess, _onGetAllError);
+                }
+
+                function _onDeleteClick(card){
+                    vm.$http({
+                        method:"DELETE",
+                        url: 'http://localhost:50653/api/flashcards/' + card.id,
+                    }).then(_onDeleteSuccess, _onDeleteError);
+
+                    vm.cardDelete = card;
+                }
+
+                function _onGetAllSuccess(response){
+                    vm.cards = response.data;
+                }
+
+                function _onGetAllError(){
+                    console.log("Error gathering flashcards");
+                }
+
+                function _onDeleteSuccess(){
+                    console.log("deleted");
+                    var cardIndex = vm.cards.indexOf(vm.cardDelete);
+                    vm.cards.splice(cardIndex, 1);
+                }
+
+                function _onDeleteError(){
+                    console.log("Error deleting card");
+                }
+
+            }
+        })();
+
+    </script>
+}
+
+

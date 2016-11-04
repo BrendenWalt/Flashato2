@@ -1,0 +1,146 @@
+﻿
+@{
+    ViewBag.Title = "Study";
+}
+
+
+
+    <style>
+        .back-text{
+            color:cadetblue;
+        }
+    </style>
+
+
+<div class="jumbotron">
+    <div data-ng-controller="allFlashController as main">
+        <h1>Study Mode</h1>
+        <div>
+            <h5>{{main.selectedCard.id}}</h5>
+            <h3 data-ng-if="main.cardFlipVal">{{main.selectedCard.front}}</h3>
+            <h3 class="back-text" data-ng-if="!main.cardFlipVal">{{main.selectedCard.back}}</h3>
+        </div>
+        <div>
+            <button data-ng-click="main.previousCard()">Previous</button>
+            <button data-ng-click="main.cardFlip()">Filp</button>
+            <button data-ng-click="main.selectRandom()">Next</button>
+        </div>
+        @*<pre>cards:{{main.cards | json}}</pre>*@
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script type="text/ng-template" id="flashcardDisplay">
+       
+    </script>
+
+    <script type="text/javascript">
+
+     @if (Model != null)
+     {
+         @:var cardId = @Model.Id;
+                             }
+
+        (function () {
+            "use strict";
+
+            var myApp = angular.module("Flashato",[]);
+
+            myApp.controller('allFlashController', AllFlashController);
+
+            AllFlashController.$inject = ['$scope'
+                                          ,'$http'];
+
+            function AllFlashController($scope
+                                        ,$http) {
+
+
+                var vm = this;
+                vm.$scope = $scope;
+                vm.$http = $http;
+
+                vm.cards=[];
+                vm.activeStack =[];
+                vm.selectedCard = {};
+                vm.cardFlipVal = true;
+
+                vm.cardFlip = _cardFlip;
+                vm.previousCard = _previousCard;
+                vm.onGetAllSuccess = _onGetAllSuccess;
+                vm.onGetAllError = _onGetAllError;
+                vm.selectRandom = _selectRandom;
+
+                render();
+
+                function render() {
+                    vm.$http({
+                        method:"GET",
+                        url: "http://localhost:50653/api/flashcards"
+                    }).then(_onGetAllSuccess, _onGetAllError);
+                }
+
+                function _cardFlip(){
+                    if (vm.cardFlipVal){
+                        vm.cardFlipVal = false;
+                    } else {
+                        vm.cardFlipVal = true;
+                    }
+                }
+
+                function _previousCard(){
+                    var stack = vm.activeStack;
+
+                    var index = stack.indexOf(vm.selectedCard);
+
+                    if (stack.length > 1){
+                        vm.selectedCard = stack[index-1];
+                    } else {
+                        alert("No previous card");
+                    }
+                    
+                }
+
+                function _onGetAllSuccess(response){
+                    vm.cards = response.data;
+                    vm.cardStack = angular.copy(vm.cards);
+
+                    vm.selectRandom();
+                }
+
+                function _onGetAllError(){
+                    console.log("Error gathering flashcards");
+                }
+
+                function _selectRandom(){
+                    //var random = vm.cardStack[Math.floor(Math.random() * vm.cardStack.length)];
+                    if(vm.cardStack.length > 0){
+                        vm.cardFlipVal = true;
+                        var random = Math.floor(Math.random() * vm.cardStack.length);
+                    
+                        vm.selected = vm.cardStack.splice(random, 1);
+                        
+
+                        vm.activeStack.push(vm.selected[0]);
+                        
+                        vm.selectedCard = vm.selected[0];
+                        console.log(vm.selectedCard);
+                    } else {
+                        alert("End of stack.");
+                    }
+                    
+                }
+            }
+        })();
+
+    </script>
+}
+
+
+
+
+
+
+
+
