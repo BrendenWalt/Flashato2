@@ -103,7 +103,7 @@
              vm.onGetCardError = _onGetCardError;
              vm.onDeleteSuccess = _onDeleteSuccess;
              vm.onDeleteError = _onDeleteError;
-             vm.sendEmail = _sendEmail;
+             vm.onEmailClick = _onEmailClick;
 
              render();
 
@@ -184,11 +184,11 @@
                  console.log("Delete error");
              }
 
-             function _sendEmail(){
+             function _onEmailClick(){
                  vm.$http({
                      method:'POST',
                      url:'/api/messages/share',
-                     param:{email:vm.email} 
+                     params:{email:vm.email} 
                  }).then(_onEmailSuccess, _onEmailError);
              }
 

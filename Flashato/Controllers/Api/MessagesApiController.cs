@@ -19,9 +19,9 @@ namespace Flashato.Controllers.Api
         }
 
         [Route("share"),HttpPost]
-        public void shareDeck(string recipient)
+        public void shareDeck(string email)
         {
-            _messageServices.SendDeck(recipient);
+            _messageServices.SendDeck(email);
 
         }
     }

@@ -25,6 +25,8 @@ namespace Flashato
             container.RegisterType<IFlashcardServices, FlashcardServices>();
 
             container.RegisterType<IUserService, UserServices>();
+
+            container.RegisterType<IMessageServices, MessageServices>();
         }
     }
 }
