@@ -1,4 +1,6 @@
 using Flashato.Controllers;
+using Flashato.Services;
+using Flashato.Services.Interfaces;
 using Microsoft.Practices.Unity;
 using System.Web.Http;
 using Unity.WebApi;
@@ -19,6 +21,10 @@ namespace Flashato
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
 
             container.RegisterType<AccountController>(new InjectionConstructor());
+
+            container.RegisterType<IFlashcardServices, FlashcardServices>();
+
+            container.RegisterType<IUserService, UserServices>();
         }
     }
 }

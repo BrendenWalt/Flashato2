@@ -1,6 +1,7 @@
 ﻿using Flashato.Domain;
 using Flashato.Models.Requests;
 using Flashato.Services;
+using Flashato.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,12 @@ namespace Flashato.Controllers.Api
     public class FlashcardApiController : ApiController
     {
 
-        //private IFlashcardServices _flashcardServices;
+        private IFlashcardServices _flashcardServices;
 
-        //public FlashcardApiController(IFlashcardServices flashcardServices)
-        //{
-        //    _flashcardServices = flashcardServices;
-        //}
+        public FlashcardApiController(IFlashcardServices flashcardServices)
+        {
+            _flashcardServices = flashcardServices;
+        }
 
         [Route, HttpPost]
         public HttpResponseMessage Insert(CardInsertRequest card)
@@ -29,8 +30,7 @@ namespace Flashato.Controllers.Api
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            FlashcardServices service = new FlashcardServices();
-            int id = service.Insert(card);
+            int id = _flashcardServices.Insert(card);
 
             int response = id;
 
@@ -45,8 +45,7 @@ namespace Flashato.Controllers.Api
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ModelState);
             }
 
-            FlashcardServices service = new FlashcardServices();
-            int id = service.Update(card);
+            int id = _flashcardServices.Update(card);
 
             int response = id;
             return Request.CreateResponse(HttpStatusCode.OK, response);
@@ -55,8 +54,8 @@ namespace Flashato.Controllers.Api
         [Route("{id:int}"), HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-            FlashcardServices service = new FlashcardServices();
-            int cardId = service.Delete(id);
+
+            int cardId = _flashcardServices.Delete(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, cardId);
         }
@@ -64,8 +63,8 @@ namespace Flashato.Controllers.Api
         [Route("{id:int}"), HttpGet]
         public HttpResponseMessage GetById(int id)
         {
-            FlashcardServices service = new FlashcardServices();
-            Flashcard card = service.GetById(id);
+
+            Flashcard card = _flashcardServices.GetById(id);
 
             return Request.CreateResponse(HttpStatusCode.OK, card);
         }
@@ -73,8 +72,8 @@ namespace Flashato.Controllers.Api
         [Route, HttpGet]
         public HttpResponseMessage GetAll()
         {
-            FlashcardServices service = new FlashcardServices();
-            List<Flashcard> deck = service.GetAllCards();
+
+            List<Flashcard> deck = _flashcardServices.GetAllCards();
 
             return Request.CreateResponse(HttpStatusCode.OK, deck);
         }

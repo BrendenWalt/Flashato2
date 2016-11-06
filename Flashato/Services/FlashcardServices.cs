@@ -1,5 +1,6 @@
 ﻿using Flashato.Domain;
 using Flashato.Models.Requests;
+using Flashato.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,11 +13,17 @@ namespace Flashato.Services
 {
     public class FlashcardServices : IFlashcardServices
     {
+        private IUserService _userService;
+
+        public FlashcardServices(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         public int Insert(CardInsertRequest card)
         {
             int cardId = 0;
-            string user = "patient0";
+            string user = _userService.GetCurrentUserId();
 
             string connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 

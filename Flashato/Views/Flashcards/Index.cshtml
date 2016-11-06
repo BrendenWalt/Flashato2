@@ -43,6 +43,18 @@
             <button class="btn btn-danger" id="deleteCard" data-ng-click="main.onDeleteClick()">Delete</button>
             <a href="/Flashcards/All" class="btn btn-secondary">View All</a>
         </form>
+        <form name="main.emailForm" novalidate>
+            <div class="form-group">
+                <label>Email</label>
+                <div>
+                    <input type="email"
+                           name="email"
+                           data-ng-model="main.email"
+                           required/>
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit" data-ng-click="main.onEmailClick()">Send Email</button>
+        </form>
         @*<pre>card:{{main.card | json}}</pre>*@
     </div>
 
@@ -77,6 +89,7 @@
 
              vm.buttonText = "Submit";
              vm.card = {};
+             vm.Email = null;
              vm.showFormErrors = false;
 
              vm.isNewCard = true;
@@ -90,6 +103,7 @@
              vm.onGetCardError = _onGetCardError;
              vm.onDeleteSuccess = _onDeleteSuccess;
              vm.onDeleteError = _onDeleteError;
+             vm.sendEmail = _sendEmail;
 
              render();
 
@@ -168,6 +182,22 @@
 
              function _onDeleteError(){
                  console.log("Delete error");
+             }
+
+             function _sendEmail(){
+                 vm.$http({
+                     method:'POST',
+                     url:'/api/messages/share',
+                     param:{email:vm.email} 
+                 }).then(_onEmailSuccess, _onEmailError);
+             }
+
+             function _onEmailSuccess(){
+                 console.log("Something happened");
+             }
+
+             function _onEmailError(){
+                 console.log("Something failed");
              }
          }
      })();
