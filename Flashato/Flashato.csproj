@@ -45,9 +45,7 @@
   </PropertyGroup>
   <!--asp.net framework 4.5.2 fix-->
   <PropertyGroup>
-
     <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
-
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -283,6 +281,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bourbon-neat\readme.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -296,6 +295,78 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\bourbon\_bourbon.scss" />
+    <Content Include="Content\bourbon\_bourbon-deprecated-upcoming.scss" />
+    <Content Include="Content\bourbon\LICENSE" />
+    <Content Include="Content\bourbon\helpers\_shape-size-stripper.scss" />
+    <Content Include="Content\bourbon\helpers\_render-gradients.scss" />
+    <Content Include="Content\bourbon\helpers\_radial-positions-parser.scss" />
+    <Content Include="Content\bourbon\helpers\_radial-arg-parser.scss" />
+    <Content Include="Content\bourbon\helpers\_linear-positions-parser.scss" />
+    <Content Include="Content\bourbon\helpers\_gradient-positions-parser.scss" />
+    <Content Include="Content\bourbon\helpers\_deprecated-webkit-gradient.scss" />
+    <Content Include="Content\bourbon\functions\_transition-property-name.scss" />
+    <Content Include="Content\bourbon\functions\_tint-shade.scss" />
+    <Content Include="Content\bourbon\functions\_radial-gradient.scss" />
+    <Content Include="Content\bourbon\functions\_px-to-em.scss" />
+    <Content Include="Content\bourbon\functions\_modular-scale.scss" />
+    <Content Include="Content\bourbon\functions\_linear-gradient.scss" />
+    <Content Include="Content\bourbon\functions\_grid-width.scss" />
+    <Content Include="Content\bourbon\functions\_flex-grid.scss" />
+    <Content Include="Content\bourbon\functions\_compact.scss" />
+    <Content Include="Content\bourbon\css3\_user-select.scss" />
+    <Content Include="Content\bourbon\css3\_transition.scss" />
+    <Content Include="Content\bourbon\css3\_transform.scss" />
+    <Content Include="Content\bourbon\css3\_radial-gradient.scss" />
+    <Content Include="Content\bourbon\css3\_placeholder.scss" />
+    <Content Include="Content\bourbon\css3\_perspective.scss" />
+    <Content Include="Content\bourbon\css3\_linear-gradient.scss" />
+    <Content Include="Content\bourbon\css3\_keyframes.scss" />
+    <Content Include="Content\bourbon\css3\_inline-block.scss" />
+    <Content Include="Content\bourbon\css3\_image-rendering.scss" />
+    <Content Include="Content\bourbon\css3\_hidpi-media-query.scss" />
+    <Content Include="Content\bourbon\css3\_font-face.scss" />
+    <Content Include="Content\bourbon\css3\_flex-box.scss" />
+    <Content Include="Content\bourbon\css3\_columns.scss" />
+    <Content Include="Content\bourbon\css3\_box-sizing.scss" />
+    <Content Include="Content\bourbon\css3\_border-radius.scss" />
+    <Content Include="Content\bourbon\css3\_border-image.scss" />
+    <Content Include="Content\bourbon\css3\_background.scss" />
+    <Content Include="Content\bourbon\css3\_background-image.scss" />
+    <Content Include="Content\bourbon\css3\_backface-visibility.scss" />
+    <Content Include="Content\bourbon\css3\_appearance.scss" />
+    <Content Include="Content\bourbon\css3\_animation.scss" />
+    <Content Include="Content\bourbon\addons\_triangle.scss" />
+    <Content Include="Content\bourbon\addons\_timing-functions.scss" />
+    <Content Include="Content\bourbon\addons\_size.scss" />
+    <Content Include="Content\bourbon\addons\_retina-image.scss" />
+    <Content Include="Content\bourbon\addons\_prefixer.scss" />
+    <Content Include="Content\bourbon\addons\_position.scss" />
+    <Content Include="Content\bourbon\addons\_html5-input-types.scss" />
+    <Content Include="Content\bourbon\addons\_hide-text.scss" />
+    <Content Include="Content\bourbon\addons\_font-family.scss" />
+    <Content Include="Content\bourbon\addons\_clearfix.scss" />
+    <Content Include="Content\bourbon\addons\_button.scss" />
+    <Content Include="Content\bourbon-neat\_neat.scss" />
+    <Content Include="Content\bourbon-neat\_neat-helpers.scss" />
+    <Content Include="Content\bourbon-neat\settings\_visual-grid.scss" />
+    <Content Include="Content\bourbon-neat\settings\_grid.scss" />
+    <Content Include="Content\bourbon-neat\grid\_visual-grid.scss" />
+    <Content Include="Content\bourbon-neat\grid\_to-deprecate.scss" />
+    <Content Include="Content\bourbon-neat\grid\_span-columns.scss" />
+    <Content Include="Content\bourbon-neat\grid\_shift.scss" />
+    <Content Include="Content\bourbon-neat\grid\_row.scss" />
+    <Content Include="Content\bourbon-neat\grid\_reset.scss" />
+    <Content Include="Content\bourbon-neat\grid\_private.scss" />
+    <Content Include="Content\bourbon-neat\grid\_pad.scss" />
+    <Content Include="Content\bourbon-neat\grid\_outer-container.scss" />
+    <Content Include="Content\bourbon-neat\grid\_omega.scss" />
+    <Content Include="Content\bourbon-neat\grid\_media.scss" />
+    <Content Include="Content\bourbon-neat\grid\_grid.scss" />
+    <Content Include="Content\bourbon-neat\grid\_fill-parent.scss" />
+    <Content Include="Content\bourbon-neat\functions\_private.scss" />
+    <Content Include="Content\bourbon-neat\functions\_new-breakpoint.scss" />
+    <Content Include="package.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

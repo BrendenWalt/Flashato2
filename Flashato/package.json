@@ -1,0 +1,10 @@
+{
+  "name": "Flashato",
+  "version": "1.0.0",
+  "description": "Flashcard app",
+
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-sass": "2.3.2"
+  }
+}
