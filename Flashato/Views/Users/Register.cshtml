@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+<div data-ng-controller="registrationController as main">
+    <form name="main.registerForm" novalidate>
+        <div class="form-group">
+            <label>Email</label>
+            <div>
+                <input placeholder="example@domain.com"
+                       type="email"
+                       name="email"
+                       data-ng-model="main.register.email"
+                       data-ng-maxlength="50"
+                       required />
+                <span data-ng-show="main.showFormErrors && main.registerForm.email.$error.required">please enter an email address</span>
+                <span data-ng-show="main.showFormErrors && main.registerForm.email.$error.max">Too Long! Text must be 50 characters or less</span>
+            </div>
+            <div>
+                <input placeholder="password"
+                       type="password"
+                       name="password1"
+                       data-ng-model="main.register.password"
+                       data-ng-maxlength="50"
+                       required />
+                <span data-ng-show="main.showFormErrors && main.registerForm.password1.$error.required">please enter a password</span>
+                <span data-ng-show="main.showFormErrors && main.registerForm.password1.$error.max">Too Long! Pass must be 50 characters or less</span>
+            </div>
+            <div>
+                <input placeholder="confirmPassword"
+                       type="password"
+                       name="password2"
+                       data-ng-model="main.register.passwordConfirm"
+                       data-ng-maxlength="50"
+                       required />
+                <span data-ng-show="main.showFormErrors && main.registerForm.password2.$error.required">please enter a password</span>
+                <span data-ng-show="main.showFormErrors && (main.registerForm.password2 != main.registerForm.password1)">passwords must match</span>
+                <span data-ng-show="main.showFormErrors && main.registerForm.password2.$error.max">Too Long! Pass must be 50 characters or less</span>
+            </div>
+            <button class="btn btn-primary" type="submit" id="registerFormSubmit" data-ng-click="main.onSubmitClick()">Submit</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script>
+        (function () {
+            "use strict";
+
+            var myApp = angular.module("Flashato", []);
+            myApp.controller('registrationController', RegistrationController);
+
+            RegistrationController.$inject = ['$scope',
+                                              '$http'];
+
+            function RegistrationController($scope, $http) {
+                var vm = this;
+
+                vm.$scope = $scope;
+                vm.$http = $http;
+
+                vm.register = {};
+                vm.showFormErrors = false;
+
+                vm.onSubmitClick = _onSubmitClick;
+                vm.onRegistrationSuccess = _onRegistrationSuccess;
+                vm.onRegistrationError = _onRegistrationError;
+
+                //render();
+
+                //function render() {
+
+                //}
+
+                function _onSubmitClick() {
+                    vm.showFormErrors = true;
+
+                    vm.$http({
+                        method: 'POST',
+                        url: '/api/users/register',
+                        data: vm.register
+                    }).then(_onRegistrationSuccess, _onRegistrationError);
+                }
+
+                function _onRegistrationSuccess(data) {
+                    console.log(data);
+                }
+
+                function _onRegistrationError() {
+                    console.log();
+                }
+            }
+
+        })();
+    </script>
+  
+    }
