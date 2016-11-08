@@ -1,0 +1,25 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding-top: 0; }
+
+h1 {
+  margin: 0; }
+
+#landing-container {
+  height: 100vh;
+  background-image: url("../../Images/old-books-web.jpg");
+  background-size: cover;
+  position: center;
+  text-align: center; }
+  #landing-container .landing-content {
+    position: relative;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }

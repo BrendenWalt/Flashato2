@@ -1,92 +1,70 @@
-﻿
-@using Flashato.Domain
-@model Flashcard
-@{
+﻿@{
     ViewBag.Title = "Home Page";
+    Layout = null;
 }
 
-<div class="jumbotron">
-    <div data-ng-controller="addFlashController as main">
-        <h1>New Flashcard</h1>
-        <form id="flashcardForm">
-            <div class="form-group">
-                <label>Flashcard Front</label>
-                <textarea placeholder="Text here"
-                          data-ng-model="main.card.front"></textarea>
-            </div>
-            <div class="form-group">
-                <label>Flashcard Back</label>
-                <textarea placeholder="Text here"
-                          data-ng-model="main.card.back"></textarea>
-            </div>
-            <button class="btn btn-primary" type="submit" id="flashFormSubmit" data-ng-click="main.onSubmitClick()">Submit</button>
-        </form>
-        <pre>card:{{main.card | json}}</pre>
+<!DOCTYPE html>
+<html data-ng-app="Flashato">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Flashato</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Styles/style.css" rel="stylesheet" />
+</head>
+<body data-ng-controller="landing as main">
+    @*<div>LOGO HERE</div>
+    <div id="nav-bar">
+        <ul>
+            <li>@Html.ActionLink("New Card", "Add", "Flashcards")</li>
+            <li>@Html.ActionLink("View All", "All", "Flashcards")</li>
+            <li>@Html.ActionLink("Study", "Study", "Flashcards")</li>
+        </ul>
+    </div>*@
+
+    <div id="landing-container">
+        <div class="landing-content">
+            <h1>Flashato</h1>
+            <h2>Where idiots become geniuses</h2>
+            <a href="" class="btn btn-primary">Get Started</a>
+        </div>
     </div>
 
-</div>
+    <div id="bar1">
+        <div class="bar1-container1">Pitch 1</div>
+        <div class="bar1-container2">Pitch 2</div>
+        <div class="bar1-container3">Pitch 3</div>
+    </div>
+
+    <div class="divider">
+        <h1>Now anyone can outsmart Einstein</h1>
+    </div>
 
 
-@section scripts{
-    
- <script type="text/javascript">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
 
-     @if (Model != null)
-     {
-         @:var cardId = @Model.Id;
-     }
+</body>
+</html>
 
-     (function () {
-    "use strict";
+    <script type="text/javascript">
+        (function () {
+            "use strict";
 
-    var myApp = angular.module("Flashato",[]);
+            angular.module('Flashato',[]).controller('landing', LandingController);
 
-    myApp.controller('addFlashController', AddFlashController);
+            LandingController.$inject = ['$scope'];
 
-    AddFlashController.$inject = ['$scope'
-                                  ,'$http'];
+            function LandingController($scope) {
+                var vm = this;
+                vm.$scope = $scope;
+            }
+        })();
 
-    function AddFlashController($scope
-                                ,$http) {
+    </script>
 
 
-             var vm = this;
-             vm.$scope = $scope;
-             vm.$http = $http;
-             vm.card = {};
-            
 
-             vm.onSubmitClick = _onSubmitClick;
-             vm.onCardInsertSuccess = _onCardInsertSuccess;
-             vm.onCardInsertError = _onCardInsertError;
 
-             render();
-
-             function render() {
-                 if (typeof cardId !== 'undefined' && cardId !== null){
-                     console.log(cardId);
-                 }
-             }
-
-             function _onSubmitClick() {
-                 vm.$http({
-                     method: 'POST',
-                     url: 'http://localhost:50653/api/flashcards',
-                     data: vm.card
-                 }).then(_onCardInsertSuccess, _onCardInsertError);
-             }
-
-             function _onCardInsertSuccess(data) {
-                 alert("Success!");
-                 vm.card = {};
-                 console.log(data);
-             }
-
-             function _onCardInsertError() {
-                 console.log("No card for you!");
-             }
-         }
-     })();
-
-</script>   
-    }
