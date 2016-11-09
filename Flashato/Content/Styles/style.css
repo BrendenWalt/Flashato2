@@ -10,16 +10,89 @@ body {
 h1 {
   margin: 0; }
 
-#landing-container {
-  height: 100vh;
-  background-image: url("../../Images/old-books-web.jpg");
-  background-size: cover;
-  position: center;
-  text-align: center; }
-  #landing-container .landing-content {
-    position: relative;
+#nav-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid white; }
+  #nav-bar a {
+    font-family: "Anton", sans-serif;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    float: left;
+    text-decoration-color: white;
+    list-style-type: none;
+    width: 33%;
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); }
+  #nav-bar a:hover {
+    color: #2e7061;
+    font-size: 28px; }
+  #nav-bar #nav-border {
+    text-align: center;
+    width: 100px;
+    border-bottom: 1px solid white; }
+
+#landing-container {
+  height: 100vh;
+  background-image: url("../../Images/old-books-web.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center; }
+  #landing-container .landing-content {
+    color: white;
+    /*position: relative;*/
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  #landing-container img {
+    width: 45%; }
+  #landing-container h2 {
+    margin-bottom: 35px; }
+  #landing-container .main-button {
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif; }
+    #landing-container .main-button:hover {
+      background-color: #2e7061;
+      border: 3px solid #2e7061; }
+
+#bar1 {
+  *zoom: 1;
+  display: block;
+  margin: 18vh 0; }
+  #bar1:before, #bar1:after {
+    content: " ";
+    display: table; }
+  #bar1:after {
+    clear: both; }
+  #bar1 .feature-container {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%; }
+    #bar1 .feature-container:last-child {
+      margin-right: 0; }
+    #bar1 .feature-container .svg-wrap {
+      margin: 0 auto;
+      width: 30%; }
+  #bar1 h3 {
+    font-family: "Anton", sans-serif;
+    color: #444444;
+    width: 75%;
+    text-align: center;
+    margin: 5% auto 0 auto; }
+  #bar1 path {
+    fill: #2e7061; }

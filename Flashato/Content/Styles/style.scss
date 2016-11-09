@@ -2,6 +2,12 @@
 @import '../bourbon-neat/_neat';
 @import 'Layout';
 
+$primaryColor: #2e7061;
+$local-max-width: 100%;
+$text-color: #444444;
+$font-stack: 'Anton', sans-serif;
+ 
+
 @mixin vertical-align {
     position: relative;
     top: 50%;
@@ -10,7 +16,21 @@
     transform: translateY(-50%);
 }
 
-body{
+@mixin outline-button {
+    border: 3px solid white;
+        border-radius: 8px;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        &:hover{
+            background-color: $primaryColor;
+            border: 3px solid $primaryColor;
+        }
+}
+
+body {
     margin: 0;
     padding-top: 0;
 }
@@ -19,17 +39,85 @@ h1 {
     margin: 0;
 }
 
-#landing-container{
-    height: 100vh;
-    background-image: url('../../Images/old-books-web.jpg');  
-    background-size: cover;
-    position: center;
-    text-align: center;
-    .landing-content{
-        position: relative;
+#nav-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background-color:rgba(0,0,0,0.2);
+    border-bottom:1px solid white;
+    a {
+        font-family: $font-stack;
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+        float: left;
+        text-decoration-color: white;
+        list-style-type: none;
+        width: 33%;
         @include vertical-align;
-    }    
+    }
+    a:hover {
+        color:$primaryColor;
+        font-size: 28px;
+    }
+
+
+
+    #nav-border {
+        text-align: center;
+        width: 100px;
+        border-bottom: 1px solid white;
+    }
 }
 
+#landing-container {
+    height: 100vh;
+    background-image: url('../../Images/old-books-web.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
 
+    .landing-content {
+        color: white;
+        /*position: relative;*/
+        @include vertical-align;
+    }
 
+    img {
+        width: 45%;
+    }
+    h2 {
+        margin-bottom: 35px;
+    }
+
+    .main-button{
+        @include outline-button;
+    }
+}
+
+#bar1 {
+
+    @include row();
+    margin: 18vh 0;
+
+    .feature-container {
+        @include span-columns(4);
+        .svg-wrap {
+            margin: 0 auto;
+            width: 30%;
+        }
+    }
+
+    h3{
+        font-family: $font-stack;
+        color: $text-color;
+        width: 75%;
+        text-align:center;
+        margin: 5% auto 0 auto;
+    }
+
+    path {
+        fill: #2e7061;
+    }
+}

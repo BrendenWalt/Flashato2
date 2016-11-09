@@ -289,6 +289,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="gulpfile.js" />
+    <Content Include="Images\brain.svg" />
+    <Content Include="Images\eyeglasses.svg" />
+    <Content Include="Images\Flashato_Logo1 copy.png" />
+    <Content Include="Images\idea.svg" />
     <Content Include="Images\old-books-web.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
