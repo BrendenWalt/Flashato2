@@ -58,11 +58,9 @@ h1 {
         @include vertical-align;
     }
     a:hover {
-        color:$primaryColor;
+        color:white;
         font-size: 28px;
     }
-
-
 
     #nav-border {
         text-align: center;

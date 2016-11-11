@@ -19,5 +19,7 @@ namespace Flashato.Domain
 
         public DateTime DateModified { get; set; }
 
+        public int DeckId { get; set; }
+
     }
 }

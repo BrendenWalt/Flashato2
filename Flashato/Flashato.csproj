@@ -247,9 +247,11 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DecksApiController.cs" />
     <Compile Include="Controllers\Api\FlashcardApiController.cs" />
     <Compile Include="Controllers\Api\MessagesApiController.cs" />
     <Compile Include="Controllers\Api\UsersApiController.cs" />
+    <Compile Include="Controllers\DecksController.cs" />
     <Compile Include="Controllers\FlashcardsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -268,8 +270,10 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Requests\CardInsertRequest.cs" />
     <Compile Include="Models\Requests\CardUpdateRequest.cs" />
+    <Compile Include="Models\Requests\DeckInsertRequest.cs" />
     <Compile Include="Models\Requests\RegistrationRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\DeckServices.cs" />
     <Compile Include="Services\FlashcardServices.cs" />
     <Compile Include="Services\Interfaces\IMessageServices.cs" />
     <Compile Include="Services\Interfaces\IFlashcardServices.cs" />
@@ -429,6 +433,8 @@
     <Content Include="Views\Flashcards\All.cshtml" />
     <Content Include="Views\Flashcards\Study.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
+    <Content Include="Views\Decks\Add.cshtml" />
+    <Content Include="Views\Decks\All.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

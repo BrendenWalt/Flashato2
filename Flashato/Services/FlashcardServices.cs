@@ -26,7 +26,7 @@ namespace Flashato.Services
             string user = _userService.GetCurrentUserId();
 
             string connectionString = WebConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
+            //using lab services in CART as an example
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using(SqlCommand command = new SqlCommand("dbo.Flashcards_Insert", connection))
@@ -35,6 +35,7 @@ namespace Flashato.Services
                     command.Parameters.AddWithValue("@Front", card.Front);
                     command.Parameters.AddWithValue("@Back", card.Back);
                     command.Parameters.AddWithValue("@UserId", user);
+                    command.Parameters.AddWithValue("@Deck", card.DeckId);
 
                     SqlParameter p = new SqlParameter("@Id", cardId);
                     p.Direction = ParameterDirection.Output;
@@ -163,6 +164,7 @@ namespace Flashato.Services
                                 card.UserId = datReader.GetString(startingIndex++);
                                 card.DateAdded = datReader.GetDateTime(startingIndex++);
                                 card.DateModified = datReader.GetDateTime(startingIndex++);
+                                card.DeckId = datReader.GetInt32(startingIndex++);
 
                                 if (deck == null)
                                 {

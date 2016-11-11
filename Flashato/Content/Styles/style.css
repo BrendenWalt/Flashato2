@@ -32,7 +32,7 @@ h1 {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%); }
   #nav-bar a:hover {
-    color: #2e7061;
+    color: white;
     font-size: 28px; }
   #nav-bar #nav-border {
     text-align: center;

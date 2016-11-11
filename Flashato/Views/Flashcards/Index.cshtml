@@ -33,7 +33,6 @@
                               data-ng-maxlength="500"
                               required></textarea>
                     <div role="alert" class="help-inline error">
-                        <!-- main.showClientErrors is set to true the first time the form is submitted. -->
                         <span data-ng-show="main.showFormErrors && main.cardForm.back.$error.required">You need stuff here!</span>
                         <span data-ng-show="main.showFormErrors && main.cardForm.back.$error.max">Too Long! Text must be 500 characters or less</span>
                     </div>

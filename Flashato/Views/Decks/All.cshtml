@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "All";
+}
+
+<div data-ng-controller="allDecksController as main" data-ng-cloak></div>
+<h2>All Decks</h2>
+
+@section scripts{
+    
+    <script type="text/javascript">
+
+        (function () {
+            "use strict";
+
+            angular.module("Flashato").controller("allDecksController", AllDecksControllerFn);
+
+            AllDecksControllerFn.$inject = ['$scope', '$http'];
+
+            function AllDecksControllerFn($scope, $http) {
+
+                var vm = this;
+                vm.$scope = $scope;
+                vm.$http = $http;
+
+                render();
+
+                function render() {
+
+                }
+            }
+        })();
+
+    </script>
+    
+    }
+

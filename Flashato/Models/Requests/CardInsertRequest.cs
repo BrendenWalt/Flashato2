@@ -16,5 +16,7 @@ namespace Flashato.Models.Requests
         [MaxLength(500)]
         public string Back { get; set; }
 
+        [Required]
+        public int DeckId { get; set; }
     }
 }
